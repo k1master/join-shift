@@ -1,0 +1,18 @@
+FROM node:latest
+
+
+ENV PATH /var/www/test/frontend/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY ./frontend /var/www/test/frontend
+COPY ./frontend/package.json /var/www/test/frontend
+COPY ./frontend/package-lock.json /var/www/test/frontend
+
+# set working directory
+WORKDIR /var/www/test/frontend
+
+RUN npm install --silent
+
+# start app
+EXPOSE 3000
+CMD ["npm", "start"]
